@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+          <div class="hud-ambient-wash"></div>
+
+<!-- MAIN STICKY PRODUCTION GLOBAL HEADER CONTROL PANEL -->
+<header class="hud-global-header">
+  <div class="brand-monogram">MÀISON // ORGANIZER</div>
+  <div class="clock-telemetry-module" id="hudClock">00:00:00</div>
+  <div class="calendar-status-pill">
+    <span class="active-pulse-dot"></span>
+    <span id="currentDayLabel" class="weekday-string">TODAY</span>
+  </div>
+</header>
+
+<!-- HERO SCREEN SUB-NAVIGATION HORIZONTAL MATRIX BAR -->
+<nav class="hud-horizontal-sub-nav">
+  <div class="sub-nav-wrapper">
+    <button onclick="jumpToWorkspacePage(0)" class="sub-nav-link active-tab" data-tab="0"><span>NOTES MODULE</span></button>
+    <button onclick="jumpToWorkspacePage(1)" class="sub-nav-link" data-tab="1"><span>REMINDERS LOG</span></button>
+    <button onclick="jumpToWorkspacePage(2)" class="sub-nav-link" data-tab="2"><span>TO-DO & TASKS</span></button>
+    <button onclick="jumpToWorkspacePage(3)" class="sub-nav-link" data-tab="3"><span>CALENDAR ENGINE</span></button>
+  </div>
+</nav>
+
+<!-- MAIN WIDE PAGED INTERFACE WINDOWS SYSTEM SLIDER TRACK -->
+<main class="hud-pages-viewport" id="pagesTrack">
+  
+  <!-- ==================== WORKSPACE 01: REAL-TIME SAVING NOTES ==================== -->
+  <section class="hud-page-view">
+    <div class="static-production-grid-matrix">
+      
+      <div class="static-glass-card size-double-height">
+        <span class="node-serial-id">NOT // 01</span>
+        <h1 class="hud-main-heading">Creative <br><span class="serif-glint-accent">Scratchpad</span></h1>
+        <p class="hud-description-text">Type your thoughts inside the console workspace to the right. This engine auto-caches strings locally, preserving text frames during screen shifts.</p>
+      </div>
+      
+      <div class="static-glass-card size-wide-input-block">
+        <span class="node-serial-id">NOT // 02</span>
+        <span class="module-section-title">Live Editorial Pad Box</span>
+        <textarea class="hud-custom-textarea" id="noteInputBox" placeholder="Start typing your thoughts or manuscript parameters here..."></textarea>
+      </div>
+      
+      <div class="static-glass-card">
+        <span class="node-serial-id">NOT // 03</span>
+        <span class="module-section-title">Memory Metrics</span>
+        <div class="metric-center-layout">
+          <div class="circular-dial-container"><div class="center-metric-readout" id="charCountDisplay">00</div></div>
+        </div>
+        <span class="metric-footer-label">TOTAL CHARACTER LENGTH LOGGED</span>
+      </div>
+      
+      <div class="static-glass-card">
+        <span class="node-serial-id">NOT // 04</span>
+        <span class="module-section-title">Pad Registry Logs</span>
+        <div class="telemetry-log-lines">
+          <div class="log-row"><span>STATUS // SAVED</span><span class="dot-green"></span></div>
+          <div class="log-row"><span>LOCAL CACHE // ON</span><span class="dot-green"></span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== WORKSPACE 02: REMINDERS & ALERTS ==================== -->
+  <section class="hud-page-view">
+    <div class="static-production-grid-matrix">
+      
+      <div class="static-glass-card size-double-height">
+        <span class="node-serial-id">REM // 01</span>
+        <h1 class="hud-main-heading">Atmosphere <br><span class="serif-glint-accent">Reminders</span></h1>
+        <p class="hud-description-text">Configure specific reminder threads below. Enter your parameters and drop timestamps to log urgent background operational items into the grid console view.</p>
+      </div>
+      
+      <div class="static-glass-card size-wide-input-block">
+        <span class="node-serial-id">REM // 02</span>
+        <span class="module-section-title">Register Reminder Entry</span>
+        <div class="reminder-input-rack">
+          <input type="text" id="reminderText" class="hud-line-input" placeholder="Enter reminder payload string...">
+          <input type="time" id="reminderTime" class="hud-line-input">
+          <button class="hud-action-btn" onclick="createNewReminderItem()">LOG ALERT</button>
+        </div>
+      </div>
+      
+      <div class="static-glass-card size-wide-input-block scroll-card-box">
+        <span class="node-serial-id">REM // 03</span>
+        <span class="module-section-title">Active Reminder Live Board Queue</span>
+        <div class="active-task-list-container" id="reminderQueueContainer">
+          <div class="empty-state-msg">No reminders loaded inside data matrix tracks.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== WORKSPACE 03: LIVE TO-DO TASK LOGGER ==================== -->
+  <section class="hud-page-view">
+    <div class="static-production-grid-matrix">
+      
+      <div class="static-glass-card size-double-height">
+        <span class="node-serial-id">TSK // 01</span>
+        <h1 class="hud-main-heading">Structural <br><span class="serif-glint-accent">Task Board</span></h1>
+        <p class="hud-description-text">Log, audit, and wipe out your current to-do workflow lists. Click task items once completed to instantly pass deletion sweeps and balance task metrics.</p>
+      </div>
+      
+      <div class="static-glass-card">
+        <span class="node-serial-id">TSK // 02</span>
+        <span class="module-section-title">Add New Task Parameter</span>
+        <div class="reminder-input-rack">
+          <input type="text" id="taskTextInput" class="hud-line-input" placeholder="Task description...">
+          <button class="hud-action-btn" onclick="createNewTodoTaskItem()">ADD TASK</button>
+        </div>
+      </div>
+      
+      <div class="static-glass-card scroll-card-box size-double-height">
+        <span class="node-serial-id">TSK // 03</span>
+        <span class="module-section-title">Active To-Do Matrix Stream</span>
+        <div class="active-task-list-container" id="todoTasksContainer">
+          <!-- Populated dynamically via the system storage loop engine -->
+        </div>
+      </div>
+      
+      <div class="static-glass-card">
+        <span class="node-serial-id">TSK // 04</span>
+        <span class="module-section-title">Task Completion Capacity</span>
+        <div class="metric-center-layout">
+          <div class="circular-dial-container"><div class="center-metric-readout" id="taskCompletionRatio">0%</div></div>
+        </div>
+        <span class="metric-footer-label">CURRENT COMPLETION RATE INDEX</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== WORKSPACE 04: CORE CALENDAR DISPATCHER ==================== -->
+  <section class="hud-page-view">
+    <div class="static-production-grid-matrix">
+      
+      <div class="static-glass-card size-double-height">
+        <span class="node-serial-id">CAL // 01</span>
+        <h1 class="hud-main-heading">Modular <br><span class="serif-glint-accent">Calendar Engine</span></h1>
+        <p class="hud-description-text">An integrated calendar layout tracking real-time device times, letting you easily look up dates and audit schedule maps across the interface matrix frame.</p>
+      </div>
+      
+      <div class="static-glass-card size-wide-input-block">
+        <span class="node-serial-id">CAL // 02</span>
+        <div class="calendar-layout-widget-container">
+          <div class="calendar-widget-header">
+            <button class="cal-nav-btn" onclick="shiftCalendarMonth(-1)">◀</button>
+            <h3 id="calendarMonthHeader" class="cal-title-string">JULY 2026</h3>
+            <button class="cal-nav-btn" onclick="shiftCalendarMonth(1)">▶</button>
+          </div>
+          <div class="calendar-week-days-row">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+          <div class="calendar-days-grid" id="calendarGridCanvas">
+            <!-- Rendered via loop arrays mathematical script calculation matrix -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="static-glass-card">
+        <span class="node-serial-id">CAL // 03</span>
+        <span class="module-section-title">Selected Date Core Event</span>
+        <div class="selected-date-display-box" id="selectedDateText">Select a day to track...</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FLOATING RIGHT SIDE STEPPER ARROW UTILITY TRIGGER -->
+<button class="hud-right-nav-arrow" onclick="stepToNextWorkspacePage()" aria-label="Next Module Screen">
+  <svg class="arrow-svg-icon" viewBox="0 0 24 24">
+    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<div class="hud-bottom-page-index-tracker">ORGANIZER INTERFACE FRAMEWORKS // ACTIVE SCREEN: <span id="pageNumIndicator">1</span> OF 4</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
